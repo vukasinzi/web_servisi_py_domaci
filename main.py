@@ -4,6 +4,7 @@ from routes.album import album_bp
 from routes.pesma import pesma_bp
 from routes.korisnik import korisnik_bp
 from routes.recenzija import recenzija_bp
+from routes.zanr import zanr_bp
 
 blueprints = [
     (izvodjac_bp, "/api/izvodjac"),
@@ -11,6 +12,7 @@ blueprints = [
     (pesma_bp, "/api/pesma"),
     (korisnik_bp, "/api/korisnik"),
     (recenzija_bp, "/api/recenzija"),
+    (zanr_bp,"/api/zanr"),
 ]
 
 app = Flask(__name__)
