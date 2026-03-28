@@ -3,10 +3,10 @@ from config.pomoc import sredi_rezultate
 from flask import Blueprint, jsonify, request
 
 
-pesma_bp = Blueprint("pesma", __name__)
+korisnik_bp = Blueprint("korisnik", __name__)
 
-@pesma_bp.route("/", methods =["GET"])
-def get_pesma():
+@korisnik_bp.route("/", methods =["GET"])
+def get_korisnik():
     con = get_connection()
     cursor = con.cursor()
 
@@ -16,30 +16,27 @@ def get_pesma():
     return jsonify(rezultati)
     
 
-@pesma_bp.route("/", methods = ["POST"])
-def post_pesma():
+@korisnik_bp.route("/", methods = ["POST"])
+def post_korisnik():
     
     con = get_connection()
     cursor = con.cursor()
     try:
-        pesma = request.json
-        redni_broj = pesma["redni_broj"]
-        naziv = pesma["naziv"]
-        trajanje = pesma["trajanje"]
-        album_id = pesma["album_id"]
+        korisnik = request.json
+        ime = korisnik["ime"]
+        email = korisnik["email"]
 
-        cursor.execute( "INSERT INTO pesma (redni_broj, naziv, trajanje, album_id) VALUES (%s, %s, %s, %s)",
-                    (redni_broj, naziv, trajanje, album_id))
+        cursor.execute( "INSERT INTO korisnik (ime,email) VALUES (%s, %s)",(ime,email))
         con.commit()
-        return jsonify({"Poruka": "Pesma je uspesno dodata"}),201
+        return jsonify({"Poruka": "Korisnik je uspesno dodat"}),201
     except Exception as x:
         con.rollback()
         return jsonify({"greska": str(x)}), 500
     finally:
         con.close()
 
-@pesma_bp.route("/<id>", methods = ["PATCH"])
-def patch_pesma(id):
+@korisnik_bp.route("/<id>", methods = ["PATCH"])
+def patch_korisnik(id):
     con = get_connection()
     cursor = con.cursor()
     try:
@@ -48,9 +45,9 @@ def patch_pesma(id):
         for kljuc in body.keys():
             set_deo += f"{kljuc} = %s,"
         set_deo = set_deo.rstrip(",")
-        cursor.execute(f"update pesma set {set_deo} where id = %s", (*body.values(),int(id))) 
+        cursor.execute(f"update korisnik set {set_deo} where id = %s", (*body.values(),int(id))) 
         con.commit()
-        return jsonify({"Poruka": "Pesma je uspesno izmenjena"}),201
+        return jsonify({"Poruka": "Korisnik je uspesno izmenjen"}),201
 
     except Exception as x:
          con.rollback()
@@ -58,14 +55,14 @@ def patch_pesma(id):
     finally:
         con.close()
 
-@pesma_bp.route("/<id>", methods = ["DELETE"])
-def delete_pesma(id):
+@korisnik_bp.route("/<id>", methods = ["DELETE"])
+def delete_korisnik(id):
     con = get_connection()
     cursor = con.cursor()
     try:
-        cursor.execute("delete from pesma where id = %s",(id))
+        cursor.execute("delete from korisnik where id = %s",(id))
         con.commit()
-        return jsonify({"Poruka": "Pesma je uspesno uklonjena"}),201
+        return jsonify({"Poruka": "Korisnik je uspesno uklonjen"}),201
 
     except Exception as x:
          con.rollback()
