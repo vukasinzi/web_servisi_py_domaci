@@ -6,8 +6,8 @@ from routes.korisnik import korisnik_bp
 # from routes.recenzija import recenzija_bp
 
 blueprints = [
-     (izvodjac_bp, "/api/izvodjac"),
-     (album_bp, "/api/album"),
+    (izvodjac_bp, "/api/izvodjac"),
+    (album_bp, "/api/album"),
     (pesma_bp, "/api/pesma"),
     (korisnik_bp, "/api/korisnik"),
     (recenzija_bp, "/api/recenzija"),
