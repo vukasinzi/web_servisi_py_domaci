@@ -60,7 +60,7 @@ def delete_korisnik(id):
     con = get_connection()
     cursor = con.cursor()
     try:
-        cursor.execute("delete from korisnik where id = %s",(id))
+        cursor.execute("delete from korisnik where id = %s", (id,))
         con.commit()
         return jsonify({"Poruka": "Korisnik je uspesno uklonjen"}),201
 

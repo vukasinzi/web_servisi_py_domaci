@@ -56,7 +56,7 @@ def delete_izvodjac(id):
     con = get_connection()
     cursor = con.cursor()
     try:
-        cursor.execute("delete from izvodjac where id = %s", (id))
+        cursor.execute("delete from izvodjac where id = %s", (id,))
         con.commit()
         return jsonify({"Poruka": "Izvodjac je uspesno uklonjen"}), 201
     except Exception as x:

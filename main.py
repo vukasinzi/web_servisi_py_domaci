@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from routes.izvodjac import izvodjac_bp
 from routes.album import album_bp
 from routes.pesma import pesma_bp
@@ -16,6 +16,10 @@ blueprints = [
 ]
 
 app = Flask(__name__)
+
+@app.route("/")
+def pocetna():
+    return render_template("index.html")
 
 for bp, prefix in blueprints:
     app.register_blueprint(bp, url_prefix=prefix)

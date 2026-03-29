@@ -63,7 +63,7 @@ def delete_pesma(id):
     con = get_connection()
     cursor = con.cursor()
     try:
-        cursor.execute("delete from pesma where id = %s",(id))
+        cursor.execute("delete from pesma where id = %s", (id,))
         con.commit()
         return jsonify({"Poruka": "Pesma je uspesno uklonjena"}),201
 

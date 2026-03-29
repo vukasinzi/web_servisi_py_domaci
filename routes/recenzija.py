@@ -57,7 +57,7 @@ def delete_recenzija(id):
     con = get_connection()
     cursor = con.cursor()
     try:
-        cursor.execute("delete from recenzija where id = %s", (id))
+        cursor.execute("delete from recenzija where id = %s", (id,))
         con.commit()
         return jsonify({"Poruka": "Recenzija je uspesno uklonjena"}), 201
     except Exception as x:

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="sr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muzički katalog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="kicker">Flask API</p>
+        <h1>Muzički katalog</h1>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>Ručno slanje zahteva</h2>
+        <form id="request-form" class="form">
+          <label>
+            Metoda
+            <select id="method">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+          </label>
+
+          <label>
+            Resurs
+            <select id="resource"></select>
+          </label>
+
+          <label id="id-field" class="hidden">
+            ID
+            <input id="resource-id" type="text" placeholder="npr. 5" />
+          </label>
+
+          <div id="fields-field" class="field-block">
+            <span>Polja</span>
+            <div id="field-container" class="field-grid"></div>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Pošalji zahtev</button>
+            <button type="button" class="ghost" id="clear-output">Obriši rezultat</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Odgovor servera</h2>
+        <div class="status" id="status">Spreman.</div>
+        <pre id="output">{}</pre>
+      </section>
+    </main>
+
+    <footer class="foot"></footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
